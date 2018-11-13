@@ -22,7 +22,7 @@
                                 <rect key="frame" x="110" y="256" width="155" height="155"/>
                                 <state key="normal" image="Record"/>
                                 <connections>
-                                    <action selector="StartRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GyU-dT-mrv"/>
+                                    <action selector="startRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GyU-dT-mrv"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FI7-bt-qn6">
@@ -39,7 +39,7 @@
                                 </constraints>
                                 <state key="normal" image="Stop"/>
                                 <connections>
-                                    <action selector="StopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4qF-YM-5Pl"/>
+                                    <action selector="stopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4qF-YM-5Pl"/>
                                 </connections>
                             </button>
                         </subviews>

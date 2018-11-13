@@ -18,15 +18,17 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     var audioRecorder: AVAudioRecorder!
     
+    enum Status: Int {case on = 0, off}
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    @IBAction func StartRecording(_ sender: Any) {
-        recordLabel.text = "Recording in Progress"
-        recordButton.isEnabled = false
-        stopButton.isEnabled = true
+    @IBAction func startRecording(_ sender: Any) {
+        setRecordLabel(text: "Recording in Progress")
+        disableRecordButton()
+        showStopButton()
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
         let recordingName = "recordedVoice.wav"
@@ -43,10 +45,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         audioRecorder.record()
         
     }
-    @IBAction func StopRecording(_ sender: Any) {
-        recordLabel.text = "Tap to Record"
-        recordButton.isEnabled = true
-        stopButton.isEnabled = false
+    @IBAction func stopRecording(_ sender: Any) {
+        setRecordLabel(text: "Tap to Record")
+        disableRecordButton()
+        showRecordButton()
 
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
@@ -67,6 +69,26 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             let recordedAudioURL = sender as! URL
             playSoundVC.recordedAudioURL = recordedAudioURL
         }
+    }
+    
+    func setRecordLabel(text: String) {
+        recordLabel.text = text
+    }
+    
+    func showRecordButton() {
+        recordButton.isEnabled = true
+    }
+    
+    func disableRecordButton() {
+        recordButton.isEnabled = false
+    }
+    
+    func showStopButton() {
+        stopButton.isEnabled = true
+    }
+    
+    func disableStopButton() {
+        stopButton.isEnabled = false
     }
 }
 
