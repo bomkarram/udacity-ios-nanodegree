@@ -10,7 +10,6 @@ import UIKit
 import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
-
     
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var recordLabel: UILabel!
@@ -26,9 +25,9 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
 
     @IBAction func startRecording(_ sender: Any) {
-        setRecordLabel(text: "Recording in Progress")
-        disableRecordButton()
-        showStopButton()
+        changeRecordButton(status: .off)
+        changeStopButton(status: .on)
+
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
         let recordingName = "recordedVoice.wav"
@@ -46,9 +45,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         
     }
     @IBAction func stopRecording(_ sender: Any) {
-        setRecordLabel(text: "Tap to Record")
-        disableRecordButton()
-        showRecordButton()
+        changeRecordButton(status: .off)
+        changeRecordButton(status: .on)
 
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
@@ -75,20 +73,24 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         recordLabel.text = text
     }
     
-    func showRecordButton() {
-        recordButton.isEnabled = true
+    func changeRecordButton(status: Status) {
+        switch status {
+        case .on:
+            recordButton.isEnabled = true
+            setRecordLabel(text: "Tap to Record")
+        case .off:
+            recordButton.isEnabled = false
+        }
     }
     
-    func disableRecordButton() {
-        recordButton.isEnabled = false
-    }
-    
-    func showStopButton() {
-        stopButton.isEnabled = true
-    }
-    
-    func disableStopButton() {
-        stopButton.isEnabled = false
+    func changeStopButton(status: Status) {
+        switch status {
+        case .on:
+            stopButton.isEnabled = true
+            setRecordLabel(text: "Recording in Progress")
+        case .off:
+            stopButton.isEnabled = false
+        }
     }
 }
 
