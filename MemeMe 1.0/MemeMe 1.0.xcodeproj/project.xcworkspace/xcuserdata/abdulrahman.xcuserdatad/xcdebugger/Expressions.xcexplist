@@ -33,5 +33,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "closure #1 in ViewController.save(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "activity?.rawValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

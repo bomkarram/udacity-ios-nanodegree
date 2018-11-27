@@ -69,7 +69,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         shareButton.isEnabled = false
         imagePickerView.image = nil
-        topTextField.text = "BOTTOM"
+        topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
     }
     
@@ -142,6 +142,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(imagePicker, animated: true, completion: nil)
     }
 
+    // change text attributes
     func setMemeText(textField: UITextField, text: String) {
         let memeTextAttr: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.strokeColor: UIColor.black,
@@ -158,29 +159,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let image = generateMemedImage()
         let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        controller.completionWithItemsHandler = {
+             (activity, success, items, error) in
+            if success {
+                Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imagePickerView.image!, memedImage: image)
+            }
+        }
         self.present(controller, animated: true, completion: nil)
-        
-        Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: image)
     }
     
     func generateMemedImage() -> UIImage {
+        // prepare view for taking screenshut
         view.backgroundColor = UIColor.black
         topToolbar.isHidden = true
         bottomToolbar.isHidden = true
+        
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
         view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
+        // undo view changes
         view.backgroundColor = UIColor.white
         topToolbar.isHidden = false
         bottomToolbar.isHidden = false
 
         return memedImage
     }
-    
-
 }
 struct Meme {
     var topText: String
