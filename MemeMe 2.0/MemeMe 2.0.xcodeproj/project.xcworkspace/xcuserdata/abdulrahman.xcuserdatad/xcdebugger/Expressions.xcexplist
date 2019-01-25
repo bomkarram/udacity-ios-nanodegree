@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ViewController.textFieldDidBeginEditing(_:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.textFieldDidEndEditing(_:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.keyboardWillShow(_:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "-[UITextField _becomeFirstResponder]:(null)">
+         <PersistentStrings>
+            <PersistentString
+               value = "isTopTextFieldEditing">
+            </PersistentString>
+            <PersistentString
+               value = "isBottomTextFieldEditing">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.keyboardWillHide(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.frame.origin.y">
+            </PersistentString>
+            <PersistentString
+               value = "getKeyboardHeight(notification)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ViewController.save(_:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "activity?.rawValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
