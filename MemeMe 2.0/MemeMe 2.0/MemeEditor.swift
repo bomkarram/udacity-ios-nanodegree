@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
-class MemeCreator: UIViewController{
+class MemeEditor: UIViewController{
     
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var topToolbar: UIToolbar!
@@ -54,27 +55,18 @@ class MemeCreator: UIViewController{
     }
     
     @IBAction func cancel(_ sender: Any) {
-        
-        shareButton.isEnabled = false
-        imagePickerView.image = nil
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func save(_ sender: Any) {
         let image = generateMemedImage()
-        var controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        var meme: Meme?
+        let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         controller.completionWithItemsHandler = {
              (activity, success, items, error) in
             if success {
-                meme = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imagePickerView.image!, memedImage: image)
-                (UIApplication.shared.delegate as! AppDelegate).memes.append(meme!)
-                
-                let storyBoard = UIStoryboard(name: "MemeView", bundle: nil)
-                let controller = storyBoard.instantiateViewController(withIdentifier: "MemeView") as! UITabBarController
-                
-                self.present(controller, animated: true, completion: nil)
+                let memeData = MemeData()
+                memeData.addMeme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!, originalImage: self.imagePickerView.image!, memedImage: image)
+                self.dismiss(animated: true, completion: nil)
             }
         }
         self.present(controller, animated: true, completion: nil)
@@ -102,7 +94,7 @@ class MemeCreator: UIViewController{
 }
 
 // observer for keyboard showing/hiding
-extension MemeCreator {
+extension MemeEditor {
     func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -135,7 +127,7 @@ extension MemeCreator {
     }
 }
 
-extension MemeCreator: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MemeEditor: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBAction func pickAnImage(_ whichButton: UIBarButtonItem) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -163,7 +155,7 @@ extension MemeCreator: UIImagePickerControllerDelegate, UINavigationControllerDe
     }
 }
 
-extension MemeCreator: UITextFieldDelegate {
+extension MemeEditor: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField.tag {
         case myTextField.top.rawValue:
