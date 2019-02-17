@@ -7,3 +7,15 @@
 //
 
 import Foundation
+import UIKit
+
+class MemeDetailView: UIViewController {
+    
+    @IBOutlet weak var memeView: UIImageView!
+    var memeImage: UIImage! = nil
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        memeView.image = memeImage
+    }
+}

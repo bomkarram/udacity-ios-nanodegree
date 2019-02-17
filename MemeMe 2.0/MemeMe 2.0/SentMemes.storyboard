@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -59,17 +60,48 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Sent Memes" id="Tpa-hM-Gwe">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="yel-MX-034"/>
                         <barButtonItem key="rightBarButtonItem" tag="-1" systemItem="add" id="l89-8P-MAR">
                             <connections>
                                 <action selector="addMeme:" destination="0kI-7Y-skp" id="qZz-85-rd8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="9vu-gf-lnb" kind="show" identifier="MemeDetailView" id="hX3-bn-wTr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YWT-5f-xfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2927" y="-313"/>
+        </scene>
+        <!--Meme Detail View-->
+        <scene sceneID="8GR-ta-HYa">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailView" id="9vu-gf-lnb" customClass="MemeDetailView" customModule="MemeMe_2_0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JU3-4h-rHX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u8s-P2-uz6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="u8s-P2-uz6" firstAttribute="width" secondItem="JU3-4h-rHX" secondAttribute="width" id="Hiu-UU-bAp"/>
+                            <constraint firstItem="u8s-P2-uz6" firstAttribute="leading" secondItem="fnc-yG-OGy" secondAttribute="leading" id="Zrk-u9-Xgm"/>
+                            <constraint firstItem="u8s-P2-uz6" firstAttribute="height" secondItem="JU3-4h-rHX" secondAttribute="height" id="dBu-PW-eCH"/>
+                            <constraint firstItem="u8s-P2-uz6" firstAttribute="top" secondItem="fnc-yG-OGy" secondAttribute="top" constant="-64" id="wAs-Ak-jcQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fnc-yG-OGy"/>
+                    </view>
+                    <connections>
+                        <outlet property="memeView" destination="u8s-P2-uz6" id="aDa-4P-DEk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u8R-4S-2xG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3849" y="-15"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7bQ-zU-S8h">
@@ -173,6 +205,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="9vu-gf-lnb" kind="show" identifier="MemeDetailView" id="beb-O3-BB5"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wj2-GM-8RD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -183,4 +218,7 @@
         <image name="collection_30x30" width="30" height="30"/>
         <image name="table_30x30" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="beb-O3-BB5"/>
+    </inferredMetricsTieBreakers>
 </document>

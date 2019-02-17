@@ -47,7 +47,18 @@ class MemeTableViewController: UITableViewController{
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(123)
+        performSegue(withIdentifier: "MemeDetailView", sender: indexPath.row)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let index = sender as! Int
+        
+        let memeData = MemeData()
+        let memeList = memeData.getMemeList()
+        let memeImage =  memeList[index].value(forKey: "memedImage") as! UIImage
+        
+        let vc = segue.destination as! MemeDetailView
+        vc.memeImage = memeImage
     }
 }
 
@@ -96,7 +107,18 @@ class MemeCollectionViewController: UICollectionViewController{
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(456)
+        performSegue(withIdentifier: "MemeDetailView", sender: indexPath.row)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let index = sender as! Int
+        
+        let memeData = MemeData()
+        let memeList = memeData.getMemeList()
+        let memeImage =  memeList[index].value(forKey: "memedImage") as! UIImage
+        
+        let vc = segue.destination as! MemeDetailView
+        vc.memeImage = memeImage
     }
 }
 
